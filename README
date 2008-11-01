@@ -1,0 +1,9 @@
+In my commuting time I try to listen to some podcasts and audiobooks.
+However the car CD player is basic and can't search within tracks.
+So a five minutes track would be awesome to scroll through it and
+restart to listen where I was before.
+
+It just works. At least in linux.
+
+It will use mencoder to convert from mp3 ou ogg to WAV and creates a TOC
+file for cdrdao. Thena just use cdrdao to save de CD.
