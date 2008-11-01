@@ -1,11 +1,12 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]
+if [ $# -ne 2 ]
 then
-  echo "Syntax: $0 <file.mp3>"
+  echo "Syntax: $0 <file.mp3> <time-in-minutes>"
   exit
 fi
 file=$1
+minutes=$2
 
 # cdrdao blank --device /dev/scd0 -n -v 2
 
@@ -14,7 +15,7 @@ toc=cd-5-minute-tracks-without-gaps.txt
 
 # many voice mp3 just have one channel and 22.5MHz or less
 # we must "expand" it
-mplayer -srate 44100 -af channels=2 -vc null -vo null -ao pcm:file=$cd $file
+mplayer -srate 44100 -af channels=2 -vc null -vo null -ao pcm:fast:waveheader:file=$cd $file
 
 echo
 echo -n ...Writing TOC...
@@ -22,7 +23,6 @@ echo CD_DA > $toc
 
 # TODO: get time from mp3 automatically
 # time length of file
-minutes=62
 
 for ((i=0; i < $minutes ; i+=5)); do
   S=$i:0:0;
